@@ -1,12 +1,13 @@
-from sql_conn import mysql_conn
-from mongo_conn import mongo_configuration
+from sql_connection import mysql_connection
+from mongodb_connection import mongo_configuration
 import pymongo
 import json
 from bson import json_util
+from subscription import check_subscription
 
 
-def get(phone_number=None, users_locator=None, users_id=None, client=None):
-    conn = mysql_conn.create()
+def get(email=None, user_locator=None, user_id=None, client=None):
+    conn = mysql_connection.create()
     cursor = conn.cursor()
 
     key = mongo_configuration.read_config()
@@ -17,15 +18,15 @@ def get(phone_number=None, users_locator=None, users_id=None, client=None):
 
     auth_type = ''
     value = ''
-    if phone_number:
-        auth_type = 'phone_number'
+    if email:
+        auth_type = 'email'
         value = email
-    elif users_locator:
+    elif user_locator:
         auth_type = 'locator'
-        value = users_locator
+        value = user_locator
     elif user_id:
         auth_type = 'user_id'
-        value = users_id
+        value = user_id
 
     user_id = 0
     email = 0
@@ -41,24 +42,26 @@ def get(phone_number=None, users_locator=None, users_id=None, client=None):
         if len(data) == 1:
             for d in data:
                 user_id = d[0]
-                phone_number = str(d[1])
-                users_locator = str(d[3])
+                email = str(d[3])
+                display_name = str(d[1])
+                phone_number = str(d[4])
+                user_locator = str(d[6])
 
                 cursor.execute("SELECT * FROM users_database WHERE user_id = %s ;", (user_id,))
-                users_db = cursor.fetchall()
-                for db in users_db:
+                user_db = cursor.fetchall()
+                for db in user_db:
                     db_name = db[1]
 
                     db = client[db_name]
                     collection = db["personal_information"]
 
-                    res = collection.find({}, {'users_id': 0, '_id': 0})
+                    res = collection.find({}, {'user_id': 0, '_id': 0})
                     for r in res:
                         x: dict = json.loads(json_util.dumps(r))
                         personal_information.update(x)
     except Exception as e:
         print(e)
-        return {"Message": "users does not exist", "statusCode": 401}
+        return {"Message": "User does not exist", "statusCode": 401}
 
     cursor.close()
     conn.close()
@@ -67,6 +70,6 @@ def get(phone_number=None, users_locator=None, users_id=None, client=None):
 
     return {"user_id": user_id, "display_name": display_name, 'db_name': db_name,
             'personalInformation': personal_information,
-            "users_locator": users_locator, "phone_number": phone_number, "email": email}
+            "user_locator": user_locator, "phone_number": phone_number, "email": email}
 
 # print(get(email='raimondo2@email.com'))

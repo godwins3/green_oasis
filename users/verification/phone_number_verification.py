@@ -1,11 +1,11 @@
 import random
-from sql_conn import mysql_conn
+from sql_connection import mysql_connection
 from datetime import datetime
 from datetime import timedelta
 from sms import send_verification_sms
-from AL_checkers import disallowed_characters
-from token import registration_token
-from users.register import normal_registration
+from checkers import disallowed_characters
+from tokenz import registration_token
+from user.register import normal_registration
 import string
 
 
@@ -22,7 +22,7 @@ def send(msg_received):
     q = datetime.now().strftime("%Y-%m-%d %H:%M")
     current_date = datetime.strptime(q[2:], '%y-%m-%d %H:%M')
 
-    conn = mysql_conn.create()
+    conn = mysql_connection.create()
     cursor = conn.cursor()
 
     cursor.execute("""SELECT * FROM `users` WHERE phone_number = %s ;""", (phone_number,))
@@ -102,7 +102,7 @@ def verify(msg_received, header):
     except KeyError:
         return {"Message": "A key is missing for code verification", "statusCode": 401}
 
-    conn = mysql_conn.create()
+    conn = mysql_connection.create()
     cursor = conn.cursor()
 
     if form.lower() == 'phonenumber':
@@ -125,7 +125,7 @@ def verify(msg_received, header):
             x = {
                 "subject": "register_normal",
                 "displayName": random_string(),
-                "about": "I love jisort!",
+                "about": "I love Tamu!",
                 "password": password,
                 "location": [],
                 "country": "KE",
