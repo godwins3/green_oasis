@@ -1,0 +1,30 @@
+.idea/
+__pycache__/
+download#stats/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+
+*.sql
+*.xml
+*.pyc
+*.db
+*.pem
+*.jpg
+*.log
+*.mwb
+*.bak
+*.pyc
+*.ini
+
+test.py
