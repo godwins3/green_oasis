@@ -1,14 +1,14 @@
 from datetime import datetime, timedelta
 from mongodb_connection import mongo_configuration
 from tokenz import generate_locator, generate_dbname, tokens
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from checkers.generate_display_name import generate
 from checkers.length_of_words import name_length, about_length
 from datetime import datetime, timedelta
 
 import random
 from datetime import datetime, timedelta
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from checkers import validEmail
 from checkers import checkEmail, checkPhone
 import string
@@ -17,7 +17,7 @@ from tamu_pool import add_user
 import json
 import bcrypt
 
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from mongodb_connection import mongo_configuration
 from tokenz import tokens
 from checkers.disallowed_characters import disallowed, not_allowed, phone_char
@@ -86,7 +86,7 @@ def fb_signup(msg_received):
                 'created': datetime.now()
             }
             fb_collection.insert_one(y)
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         db_key = mongo_configuration.read_config()
@@ -219,7 +219,7 @@ def random_string():
 
 def get_user_id_locator_by_email(email):
     try:
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         # Create a cursor

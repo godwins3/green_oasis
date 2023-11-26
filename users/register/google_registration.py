@@ -2,21 +2,21 @@ from datetime import datetime
 from datetime import timedelta
 from mongodb_connection import mongo_configuration
 from tokenz import generate_locator, generate_dbname, tokens
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from checkers.generate_display_name import generate
 from checkers.length_of_words import name_length, about_length
 from datetime import datetime, timedelta
 
 import random
 from datetime import datetime, timedelta
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from checkers import validEmail
 import string
 import pymongo
 from tamu_pool import add_user
 import bcrypt
 
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from mongodb_connection import mongo_configuration
 import pymongo
 from tokenz import tokens
@@ -44,7 +44,7 @@ def g_signup(msg_received):
 
     try:
     
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
         cursor.execute("""SELECT * FROM `users` WHERE `email` = %s ;""", (email,))
         check_exist = cursor.fetchall()
@@ -77,7 +77,7 @@ def g_signup(msg_received):
                 'name': name,
                 'created': datetime.now()
             }
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         db_key = mongo_configuration.read_config()
@@ -210,7 +210,7 @@ def random_string():
 
 def get_user_id_locator_by_email(email):
     try:
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         # Create a cursor

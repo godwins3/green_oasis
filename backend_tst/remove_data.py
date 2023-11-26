@@ -1,4 +1,4 @@
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from mongodb_connection import mongo_configuration
 import pymongo
 from user.persistence import get_user_info
@@ -12,7 +12,7 @@ def remove(string: str):
     else:
         form = 'phone_number'
 
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     cursor.execute(f"SELECT * FROM users where {form} = %s;", (_string,))

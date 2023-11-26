@@ -1,6 +1,6 @@
 import random
 from datetime import datetime, timedelta
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from email_work import send_verification_email
 from tokenz import registration_token
 from checkers import validEmail
@@ -26,7 +26,7 @@ def send(msg_received):
     q = datetime.now().strftime("%Y-%m-%d %H:%M")
     current_date = datetime.strptime(q[2:], '%y-%m-%d %H:%M')
 
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     cursor.execute("""SELECT * FROM `users` WHERE email = %s ;""", (email,))
@@ -109,7 +109,7 @@ def verify(msg_received, header):
     except KeyError:
         return {"Message": "A key is missing for code verification", "statusCode": 401}
 
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     if form.lower() == 'email':

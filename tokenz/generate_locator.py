@@ -1,5 +1,5 @@
 from tokenz import picture_code
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 
 
 # GENERATING LOCATOR
@@ -9,7 +9,7 @@ def generate():
 
 
 def check(code: str):
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM `users` WHERE `locator` = %s ;'", (code,), multi=True)

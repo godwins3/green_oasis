@@ -4,7 +4,7 @@ import json
 from bson import json_util
 from user.persistence import get_user_db
 from tokenz import tokens
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from subscription import check_subscription
 
 
@@ -14,7 +14,7 @@ def get(header):
     if not str(user_id).isalnum():
         return {'Message': 'login in again.', "statusCode": 600}
 
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     key = mongo_configuration.read_config()

@@ -1,4 +1,4 @@
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from mongodb_connection import mongo_configuration
 import pymongo
 import json
@@ -7,7 +7,7 @@ from subscription import check_subscription
 
 
 def get(email=None, user_locator=None, user_id=None, client=None):
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
 
     key = mongo_configuration.read_config()

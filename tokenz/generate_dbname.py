@@ -1,4 +1,4 @@
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 import random
 
 
@@ -9,7 +9,7 @@ def generate():
 
 
 def check(code: int):
-    conn = mysql_connection.create()
+    conn = mysql_conn.create()
     cursor = conn.cursor()
     # print(code)
 

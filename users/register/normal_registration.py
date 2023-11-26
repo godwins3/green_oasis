@@ -1,6 +1,6 @@
 import json
 from checkers import checkEmail, checkPhone
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from mongodb_connection import mongo_configuration
 import pymongo
 from tokenz import generate_locator, generate_dbname, tokens
@@ -87,7 +87,7 @@ def register(msg_received, header):
 
     else:
 
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         db_key = mongo_configuration.read_config()

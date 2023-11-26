@@ -1,4 +1,4 @@
-from sql_connection import mysql_connection
+from sql_conn import mysql_conn
 from tokenz import tokens
 import bcrypt
 from user.persistence import get_user_info
@@ -14,7 +14,7 @@ def login(msg_received):
     try:
         user_id = " "
 
-        conn = mysql_connection.create()
+        conn = mysql_conn.create()
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM users where phone_number = %s OR email = %s  ;", (key, key))
