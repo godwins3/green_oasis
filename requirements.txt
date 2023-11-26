@@ -1,0 +1,11 @@
+boto3==1.29.6
+botocore==1.32.6
+Flask==3.0.0
+flask_cors==4.0.0
+mysql_connector_repackaged==0.3.1
+pycountry==22.3.5
+pymongo==4.6.0
+python_bcrypt==0.3.2
+sms==0.4
+SQLAlchemy==2.0.23
+subscription==0.1.1
