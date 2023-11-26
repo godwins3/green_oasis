@@ -1,0 +1,3 @@
+CREATE TABLE `tamu`.`reg_verification` ( `id` INT(100) NOT NULL PRIMARY KEY AUTO_INCREMENT, `email` VARCHAR(100) NOT NULL ,
+`phone_number` VARCHAR(100) NOT NULL , `code` VARCHAR(100) NOT NULL , `date` VARCHAR(100) NOT NULL ,
+                                        `counts` INT(100) NOT NULL , `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB AUTO_INCREMENT=1;
