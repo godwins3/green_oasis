@@ -1,10 +1,9 @@
-from user.persistence import get_user_info
+from users.persistence import get_user_info
 from tokenz import tokens
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 import pymongo
-from media_handling import gallery_media
+from media_work import gallery_media
 from datetime import datetime, timedelta
-from util import date_formarter
 
 
 def upload(msg_received, header):
@@ -47,7 +46,6 @@ def upload(msg_received, header):
             'media_id': int(media_loc),
             'key': res['data']['fields']['key'],
             'created_at': created_on,
-            'formatted_date': date_formarter.format_date(created_on),
             'status': 'pending',
         }
 
