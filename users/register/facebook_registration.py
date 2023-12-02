@@ -13,7 +13,7 @@ from checkers import validEmail
 from checkers import checkEmail, checkPhone
 import string
 import pymongo
-from tamu_pool import add_user
+from go_pool import add_user
 import json
 import bcrypt
 
@@ -24,7 +24,7 @@ from checkers.disallowed_characters import disallowed, not_allowed, phone_char
 from checkers import age_calculator
 from checkers.generate_display_name import generate
 from checkers.length_of_words import name_length, about_length
-from tamu_pool import add_user
+from go_pool import add_user
 from user.register import register_country
 
 from user.util.checkKey import check

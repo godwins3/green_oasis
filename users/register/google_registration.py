@@ -13,7 +13,7 @@ from sql_conn import mysql_conn
 from checkers import validEmail
 import string
 import pymongo
-from tamu_pool import add_user
+from go_pool import add_user
 import bcrypt
 
 from sql_conn import mysql_conn
@@ -26,7 +26,7 @@ from checkers import age_calculator
 from checkers.generate_display_name import generate
 from checkers.length_of_words import name_length, about_length
 from datetime import datetime, timedelta
-from tamu_pool import add_user
+from go_pool import add_user
 from user.register import register_country
 
 def g_signup(msg_received):

@@ -11,7 +11,7 @@ from checkers.generate_display_name import generate
 from checkers.length_of_words import name_length, about_length
 from datetime import datetime, timedelta
 from tokenz import registration_token
-from tamu_pool import add_user
+from go_pool import add_user
 from referral import add_referred, check_referral_code
 import json
 from bson import json_util
