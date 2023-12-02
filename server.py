@@ -63,7 +63,7 @@ def go():
         return {"Message": "Wrong subject provided to Go", "statusCode": 500}
 
 
-@socketio.on("tamu-dating")
+@socketio.on("green-oases")
 def socket_op(message):
     header = request.headers.get("Authorization")
     _id = request.sid
@@ -90,7 +90,7 @@ def connect_user():
     header = request.headers.get("Authorization")
     _id = request.sid
     join_room(_id)
-    add_user_room.add(header, {"room_id": _id})
+    # add_user_room.add(header, {"room_id": _id})
     emit("my_response", {"Message": "User added to group"})
     return {"Message": "User added to group", "statusCode": 200}
 
