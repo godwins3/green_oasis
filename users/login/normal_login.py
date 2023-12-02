@@ -16,7 +16,7 @@ def login(msg_received):
         conn = mysql_conn.create()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM users where phone_number = %s OR email = %s  ;", (key, key))
+        cursor.execute("SELECT * FROM users where key = %s  ;", (key, key))
         row = cursor.fetchall()
 
         # while row is not None:

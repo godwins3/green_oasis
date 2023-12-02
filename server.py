@@ -13,7 +13,8 @@ from users.persistence import get_user_info
 from backend_tst import remove_data, clear_all_data
 
 from users.login.normal_login import login
-from users.register import (normal_registration, cont_normal_registration, update_normal_registration)
+from users.register import (normal_registration, cont_normal_registration, update_normal_registration, signup)
+
 
 
 from flask_socketio import SocketIO, emit, join_room
@@ -54,13 +55,17 @@ def go():
     except (KeyError, TypeError):
         return {"Message": "No subject provided to Go", "statusCode": 404}
     
-    # User Auth 
-    if msg_subject == "register_normal":
+    # User Auth
+    if msg_subject == 'register':
+        return signup.user_register(msg_received) 
+    
+    elif msg_subject == "register_normal":
         return update_normal_registration.register(msg_received, header)
 
     elif msg_subject == "update_registration":
         return cont_normal_registration.update(msg_received, header)
-
+    
+    
     elif msg_subject == 'login':
         return login(msg_received)
     
