@@ -1,4 +1,4 @@
-from AL_checkers.disallowed_characters import disallowed
+from checkers.disallowed_characters import disallowed
 
 
 def name_length(string: str):

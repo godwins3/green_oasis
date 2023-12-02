@@ -7,13 +7,12 @@ from tokenz import generate_locator, generate_dbname, tokens
 import bcrypt
 from checkers.disallowed_characters import disallowed, not_allowed, phone_char
 from checkers.validEmail import valid_email
-from checkers import check_if_verified, age_calculator
+from checkers import check_if_verified
 from checkers.generate_display_name import generate
-from checkers.length_of_words import name_length, about_length
+from checkers.length_of_words import name_length
 from datetime import datetime, timedelta
 from tokenz import registration_token
 from go_pool import add_user
-from referral import set_referral_code, add_referred
 
 
 def register(msg_received, header):
@@ -24,7 +23,6 @@ def register(msg_received, header):
     try:
 
         display_name = generate(name_length(str(msg_received["displayName"]))).strip()
-        about = about_length(str(msg_received["about"]))
         form = reg_token['form']  # str(msg_received['form']).lower()
         key = str(reg_token['key']).lower().strip()  # str(msg_received['key']).strip()
         email = str(0)
@@ -41,7 +39,6 @@ def register(msg_received, header):
 
         gender = not_allowed(str(msg_received['gender']).strip()).lower()
         birthday = int(msg_received['birthday'])  # timestamp format in milliseconds
-        age = age_calculator.calculate(birthday)
         over_18 = int(msg_received['over18'])  # 0 1
         interested_in = not_allowed(str(msg_received['interestedIn'])).strip().lower()  #
         interest = msg_received['interest']  # list
@@ -79,9 +76,6 @@ def register(msg_received, header):
     except KeyError:
         return {"Message": "A key is missing for registrations", "statusCode": 401}
 
-    if age < 18:
-        return {"Message": "You should be 18 years old or above to join Tamu.", "statusCode": 401}
-
     if check_if_verified.check(key, form) == 0:
         return {"Message": f"The {form} is not verified.", "statusCode": 401}
 
@@ -113,7 +107,6 @@ def register(msg_received, header):
             # Create the database
             for record in row:
                 user_id = int(record[0])
-                referral_code = set_referral_code.add({'user_id': user_id, 'locator': locator})["referral_code"]
 
                 cursor.execute("""
                             INSERT INTO `users_database` (`database_id`, `database_name`, `user_id`, `locator`, `date`)
@@ -125,13 +118,11 @@ def register(msg_received, header):
                 x = {
                     'user_id': int(user_id),
                     'locator': locator,
-                    'referral_code': referral_code,
                     'gender': gender,
                     'location': [],  # [{'longitude':1234,'latitude':1234,'address':}]
                     'about': about,
                     'birthday': str(datetime(1970, 1, 1) + timedelta(seconds=birthday / 1000)).split(" ")[0],
                     'birthday_timestamp': birthday,
-                    'age': age,
                     'over_18': over_18,
                     'interested_in': interested_in,
                     'interest': interest,
@@ -153,13 +144,6 @@ def register(msg_received, header):
                 }
                 add_user.add(pool_data)
 
-                # If referred
-                if ref_code != 0:
-                    try:
-                        ref_code = str(msg_received["referralCode"]).replace(" ", "")
-                        add_referred.add({'referral_code': ref_code, 'locator': locator})
-                    except KeyError:
-                        pass
 
                 tkn = str(tokens.generate_token(user_id, locator))
 

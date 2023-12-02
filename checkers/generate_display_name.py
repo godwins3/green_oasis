@@ -1,4 +1,4 @@
-from AL_checkers import check_display_name
+from checkers import check_display_name
 import random
 
 
