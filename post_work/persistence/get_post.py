@@ -1,5 +1,5 @@
 from tokenz import tokens
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 import pymongo
 from user.persistence import get_user_info
 import json

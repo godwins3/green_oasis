@@ -1,6 +1,6 @@
 from datetime import datetime
 from datetime import timedelta
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 from tokenz import generate_locator, generate_dbname, tokens
 from sql_conn import mysql_conn
 from checkers.generate_display_name import generate
@@ -17,7 +17,7 @@ from tamu_pool import add_user
 import bcrypt
 
 from sql_conn import mysql_conn
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 import pymongo
 from tokenz import tokens
 import bcrypt

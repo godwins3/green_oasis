@@ -1,4 +1,4 @@
-from mongodb_connection import mongo_connection, mongo_configuration
+from mongo_conn import mongo_connection, mongo_configuration
 from tokenz import tokens
 from subscription import check_subscription
 from user.persistence import get_user_info

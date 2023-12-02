@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 from tokenz import generate_locator, generate_dbname, tokens
 from sql_conn import mysql_conn
 from checkers.generate_display_name import generate
@@ -18,7 +18,7 @@ import json
 import bcrypt
 
 from sql_conn import mysql_conn
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 from tokenz import tokens
 from checkers.disallowed_characters import disallowed, not_allowed, phone_char
 from checkers import age_calculator

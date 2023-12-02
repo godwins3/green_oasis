@@ -1,6 +1,6 @@
 from checkers import checkEmail, checkPhone
 from sql_conn import mysql_conn
-from mongodb_connection import mongo_configuration
+from mongo_conn import mongo_configuration
 import pymongo
 from tokenz import tokens
 import bcrypt
