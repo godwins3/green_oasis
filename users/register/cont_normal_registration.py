@@ -1,7 +1,7 @@
-from user.persistence import get_user_info
+from users.persistence import get_user_info
 from tokenz import tokens
 from tokenz import registration_token
-from user.register import update_normal_registration
+from users.register import update_normal_registration
 
 
 def update(msg_received, header):

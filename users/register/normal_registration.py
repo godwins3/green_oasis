@@ -9,7 +9,7 @@ from checkers.disallowed_characters import disallowed, not_allowed, phone_char
 from checkers.validEmail import valid_email
 from checkers import check_if_verified
 from checkers.generate_display_name import generate
-from checkers.length_of_words import name_length, about_length
+from checkers.length_of_words import name_length
 from datetime import datetime, timedelta
 from tokenz import registration_token
 from go_pool import add_user
@@ -23,7 +23,6 @@ def register(msg_received, header):
     try:
 
         display_name = generate(name_length(str(msg_received["displayName"]))).strip()
-        about = about_length(str(msg_received["about"]))
         form = reg_token['form']  # str(msg_received['form']).lower()
         key = str(reg_token['key']).lower().strip()  # str(msg_received['key']).strip()
         email = str(0)
