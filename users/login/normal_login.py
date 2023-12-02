@@ -1,8 +1,7 @@
 from sql_conn import mysql_conn
 from tokenz import tokens
 import bcrypt
-from user.persistence import get_user_info
-from subscription import check_subscription
+from users.persistence import get_user_info
 
 
 def login(msg_received):
@@ -36,13 +35,10 @@ def login(msg_received):
                 tkn = str(tokens.generate_token(user_id, locator))
                 user_data = get_user_info.get(user_id=user_id)
                 registration = user_data['personalInformation']['registration']
-                check_sub = check_subscription.check(header=tkn)
                 cursor.close()
                 conn.close()
 
-                return {"Message": "Sign in successful", "token": tkn, "registration": registration,
-                        "subscription": int(check_sub),
-                        "statusCode": 200}
+                return {"Message": "Sign in successful", "token": tkn, "registration": registration, "statusCode": 200}
 
             else:
                 cursor.close()
