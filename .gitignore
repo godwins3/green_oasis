@@ -25,6 +25,6 @@ instance/
 *.mwb
 *.bak
 *.pyc
-*.ini
+# *.ini
 
 test.py
