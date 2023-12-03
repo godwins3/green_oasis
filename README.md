@@ -1,7 +1,6 @@
-# Jisort Backend
+# Green Oases Backend
 
-<p>Jisort is a short term loaning dervice that helps the common mwananchi in Kenya to access transport
-services on credit.</p>
+<p>Green Oases a greener planet abetter home.</p>
 
 ---
 ## Setup
@@ -20,7 +19,7 @@ git clone https://github.com/JisortTechnologies/jisort_backend.git
 <li> Create a virtual environment</li>
 
 ```bash
-python -m venv tamuenv
+python -m venv goenv
 ```
 
 <li> Install requirements via pip</li>
