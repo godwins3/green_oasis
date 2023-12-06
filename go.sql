@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tamu`
+-- Database: `go`
 --
 
 -- --------------------------------------------------------
@@ -55,9 +55,7 @@ INSERT INTO `reg_verification` (`id`, `email`, `phone_number`, `code`, `date`, `
 CREATE TABLE `users` (
   `user_id` int NOT NULL,
   `display_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `what_i_do` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone_number` varchar(100) NOT NULL,
+  `key` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `locator` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
@@ -68,8 +66,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `display_name`, `what_i_do`, `email`, `phone_number`, `password`, `locator`, `location`, `date`) VALUES
-(3705, 'Hassan0709', '0', '0', '+254792170636', '$2a$12$tigIs0Ju.6dqeTKW43yf5OUf1KMhWbqi4CFZvxNbprz1e4h6ToAXC', 'KFZ14Z653', 'KE', '2023-05-31 11:59:45');
+INSERT INTO `users` (`user_id`, `display_name`, `key`, `password`, `locator`, `location`, `date`) VALUES
+(3705, 'Hassan0709', '+254792170636', '$2a$12$tigIs0Ju.6dqeTKW43yf5OUf1KMhWbqi4CFZvxNbprz1e4h6ToAXC', 'KFZ14Z653', 'KE', '2023-05-31 11:59:45');
 
 -- --------------------------------------------------------
 
