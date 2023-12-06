@@ -65,6 +65,8 @@ def go():
     elif msg_subject == "update_registration":
         return cont_normal_registration.update(msg_received, header)
     
+    elif msg_subject == "uploadImage":
+        return    
     
     elif msg_subject == 'login':
         return login(msg_received)
