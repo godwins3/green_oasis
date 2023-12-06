@@ -15,7 +15,7 @@ instance/
 .webassets-cache
 
 
-*.sql
+# *.sql
 *.xml
 *.pyc
 *.db
@@ -25,6 +25,6 @@ instance/
 *.mwb
 *.bak
 *.pyc
-# *.ini
+*.ini
 
 test.py

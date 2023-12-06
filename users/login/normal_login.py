@@ -6,17 +6,18 @@ from users.persistence import get_user_info
 
 def login(msg_received):
     try:
-        key = str(msg_received["key"]).replace(" ", "").replace("_deleted", "")
+        # key = str(msg_received["key"]).replace(" ", "").replace("_deleted", "")
+        key = str(msg_received['key'])
         plain_password = str(msg_received["password"]).encode('utf-8')
     except KeyError:
         return {"Message": "A key is missing", "statusCode": 401}
     try:
-        user_id = " "
+        user_id = ""
 
         conn = mysql_conn.create()
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM users where key = %s  ;", (key, key))
+        cursor.execute("SELECT * FROM users where key = %s;", (key))
         row = cursor.fetchall()
 
         # while row is not None:

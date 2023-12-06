@@ -3,7 +3,7 @@ from sql_conn import mysql_conn
 
 
 def check_email(msg_received):
-    email = str(msg_received["email"])
+    email = str(msg_received["key"])
 
     if email == '0':
         return json.dumps({'phone': '0'})

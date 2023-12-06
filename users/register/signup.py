@@ -35,8 +35,16 @@ def user_register(msg_received):
 
             if checkp["phone"] == '1':
                 return {"Message": "phone number already in use.", "statusCode": 401}
+        
+        elif form == 'email':
+            checke = checkEmail(msg_received)
+            if checke['email'] == 1:
+                return
+            else:
+                return         
         else:
             return {"Message": "Invalid form type", "statusCode": 401}
+        
 
     except KeyError as k:
         return {"Message": "A key is missing for registrations", "Error": str(k), "statusCode": 401}
@@ -99,4 +107,3 @@ def user_register(msg_received):
         return {"TypeError": "Account not created", "statusCode": 500}
     except Exception as e:
         return {"Message": "Account not created", "Error": str(e), "statusCode": 500}
-    
