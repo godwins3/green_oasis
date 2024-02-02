@@ -1,7 +1,7 @@
 from mongo_conn import mongo_configuration
 import pymongo
 from datetime import datetime
-import pycountry
+from util.location.core import get_location
 
 
 def register(country_name: str):
@@ -13,7 +13,8 @@ def register(country_name: str):
     country_collection = db["countries"]
 
     if country_collection.count_documents({"country": country_name}) == 0:
-        country_data = pycountry.countries.get(alpha_2=country_name)
+        country_data = get_location()
+        country_data = country_data['country_name']
         x = {
             "country": country_name.upper(),
             "full_country_name": country_data.name,
