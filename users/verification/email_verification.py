@@ -29,11 +29,11 @@ def send(msg_received):
     conn = mysql_conn.create()
     cursor = conn.cursor()
 
-    cursor.execute("""SELECT * FROM `users` WHERE email = %s ;""", (email,))
+    cursor.execute("""SELECT * FROM `users` WHERE email = %s;""", (email,))
     users = cursor.fetchall()
 
     if len(users) == 0:
-        cursor.execute("SELECT *FROM `reg_verification` WHERE email = %s; ", (email,))
+        cursor.execute("""SELECT *FROM `reg_verification` WHERE email = %s;""", (email,))
         reg_verification = cursor.fetchall()
 
         if len(reg_verification) == 0:
@@ -114,7 +114,7 @@ def verify(msg_received, header):
 
     if form.lower() == 'email':
         cursor.execute("""
-        SELECT * FROM `reg_verification` WHERE email = %s AND code = %s ; 
+        SELECT * FROM `reg_verification` WHERE email = %s AND code = %s; 
         """, (key, code))
         reg_verification = cursor.fetchall()
 
@@ -122,7 +122,7 @@ def verify(msg_received, header):
 
         if len(reg_verification) == 1:
             cursor.execute("""
-            UPDATE `reg_verification` SET `state` = 'verified' , code = %s WHERE email = %s AND code = %s ; 
+            UPDATE `reg_verification` SET `state` = 'verified' , code = %s WHERE email = %s AND code = %s; 
             """, (new_code, key, code))
 
             conn.commit()
@@ -132,15 +132,12 @@ def verify(msg_received, header):
             x = {
                 "subject": "register_normal",
                 "displayName": random_string(),
-                "about": "I love Tamu!",
+                "about": "I love Green Oases!",
                 "password": password,
                 "location": [],
                 "country": "KE",
                 "gender": "male",
-                "birthday": 763679927000,
                 "over18": 1,
-                "interestedIn": "female",
-                "interest": ['running', 'swimming', 'dancing'],
                 # "profile_image": 0
             }
             res = dict(normal_registration.register(x, header))
