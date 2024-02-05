@@ -4,7 +4,7 @@ from sql_conn import mysql_conn
 from email_work import send_verification_email
 from tokenz import registration_token
 from checkers import validEmail
-from user.register import normal_registration
+from users.register import normal_registration
 import string
 
 

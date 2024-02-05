@@ -5,7 +5,7 @@ from datetime import timedelta
 from sms import send_verification_sms
 from checkers import disallowed_characters
 from tokenz import registration_token
-from user.register import normal_registration
+from users.register import normal_registration
 import string
 
 
